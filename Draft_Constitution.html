@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Draft for an Open Source Constitution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+        
+        /* Table of Contents */
+        nav {
+            position: sticky;
+            top: 20px;
+            height: calc(100vh - 40px);
+            overflow-y: auto;
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        nav h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        nav a:hover {
+            background: #e3f2fd;
+            color: #2980b9;
+            padding-left: 1rem;
+        }
+        
+        /* Main Content */
+        main {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .doc-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .doc-header h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .doc-header .subtitle {
+            font-size: 1.3rem;
+            color: #5a6c7d;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+        
+        /* Preamble */
+        .preamble {
+            font-size: 1.1rem;
+            line-height: 2;
+            margin: 2rem 0 3rem 0;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            font-style: italic;
+        }
+        
+        .preamble p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Articles */
+        article {
+            margin-bottom: 3rem;
+            scroll-margin-top: 20px;
+        }
+        
+        article h2 {
+            font-size: 1.8rem;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+        }
+        
+        .section h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .section p, .section ul, .section ol {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+        
+        .section ul, .section ol {
+            margin-left: 2rem;
+        }
+        
+        .section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Subsections */
+        .subsection {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subsection-label {
+            font-weight: 600;
+            color: #2980b9;
+        }
+        
+        /* Notes Section */
+        .notes {
+            background: #fff9e6;
+            border: 2px solid #f39c12;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .notes h2 {
+            color: #d68910;
+            margin-bottom: 1rem;
+        }
+        
+        .notes h3 {
+            color: #8b6914;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3498db;
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .back-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.5);
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                grid-template-columns: 1fr;
+            }
+            nav, .back-to-top {
+                display: none;
+            }
+            main {
+                box-shadow: none;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                position: relative;
+                height: auto;
+                margin-bottom: 1rem;
+            }
+            main {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="javascript:void(0)" data-target="preamble">Preamble</a></li>
+                <li><a href="javascript:void(0)" data-target="article-i">Article I - Mission</a></li>
+                <li><a href="javascript:void(0)" data-target="article-ii">Article II - Definitions</a></li>
+                <li><a href="javascript:void(0)" data-target="article-iii">Article III - Supremacy</a></li>
+                <li><a href="javascript:void(0)" data-target="article-iv">Article IV - Declaration of Rights</a></li>
+                <li><a href="javascript:void(0)" data-target="article-v">Article V - Traditional Rights</a></li>
+                <li><a href="javascript:void(0)" data-target="article-vi">Article VI - Territory</a></li>
+                <li><a href="javascript:void(0)" data-target="article-vii">Article VII - Citizenship</a></li>
+                <li><a href="javascript:void(0)" data-target="article-viii">Article VIII - Levels of Government</a></li>
+                <li><a href="javascript:void(0)" data-target="article-ix">Article IX - Powers of Government</a></li>
+                <li><a href="javascript:void(0)" data-target="article-x">Article X - Legislative</a></li>
+                <li><a href="javascript:void(0)" data-target="article-xi">Article XI - Executive</a></li>
+                <li><a href="javascript:void(0)" data-target="article-xii">Article XII - Judicial</a></li>
+                <li><a href="javascript:void(0)" data-target="article-xiii">Article XIII - Financial & Structural Integrity</a></li>
+                <li><a href="javascript:void(0)" data-target="article-xiv">Article XIV - General Provisions</a></li>
+                <li><a href="javascript:void(0)" data-target="article-xv">Article XV - Calendar</a></li>
+                <li><a href="javascript:void(0)" data-target="article-xvi">Article XVI - Amendments</a></li>
+                <li><a href="javascript:void(0)" data-target="article-xvii">Article XVII - Transition</a></li>
+                <li><a href="javascript:void(0)" data-target="article-xviii">Article XVIII - Effective Date</a></li>
+                <li><a href="javascript:void(0)" data-target="notes">Notes for Further Development</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <div class="doc-header">
+                <h1>A DRAFT FOR AN OPEN SOURCE CONSTITUTION</h1>
+                <div class="subtitle">A 21st Century Social Contract</div>
+            </div>
+            
+            <section id="preamble" class="preamble">
+                <p><strong>WE, THE PEOPLE, exercising our inherent sovereignty, do hereby establish this Constitution, with the aim of creating a more perfect Union, and invite all people to peacefully join our Union.</strong></p>
+                
+                <p><strong>With this Constitution, we affirm our common wish to live together in peace and harmony, to preserve the heritage of the past, and to protect the promise of the future.</strong></p>
+                
+                <p><strong>As people of many Nations, we cherish the diversity of our cultures; our differences enrich us.</strong></p>
+                
+                <p><strong>We descend from the Indigenous Nations that sprang from these lands, and from the settlers who uprooted lives abroad to put down roots here.</strong></p>
+                
+                <p><strong>We, who remain, wish no other home than this.</strong></p>
+                
+                <p><strong>Having known war, we hope for peace; having been divided, we wish for unity. Having been ruled, we seek freedom.</strong></p>
+                
+                <p><strong>With the goal of creating a living document that will grow and adapt to the world's ever-changing challenges, we offer this as an open source starting point.</strong></p>
+            </section>
+            
+            <article id="article-i">
+                <h2>ARTICLE I - Mission</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>The mission of this Constitution is to establish a government of, by, and for the People, founded on principles of direct democracy, shared sovereignty, ecological stewardship, and restorative justice.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>This Constitution recognizes that:</p>
+                    <ul>
+                        <li>(a) Sovereignty resides inherently in the People, who exercise it directly through participatory governance;</li>
+                        <li>(b) First Nations possess rights arising from their ancestral connection to these lands, including co-governance and shared stewardship of territories;</li>
+                        <li>(c) All people, regardless of origin, have equal dignity and rights under law;</li>
+                        <li>(d) The land, waters, and air are held in common trust for present and future generations;</li>
+                        <li>(e) Justice requires not only equality before the law, but active efforts to ensure equitable access to resources and opportunity.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>This Constitution seeks to create a society where:</p>
+                    <ul>
+                        <li>(a) Every person participates meaningfully in decisions that affect their lives;</li>
+                        <li>(b) Power is distributed rather than concentrated;</li>
+                        <li>(c) Economic security is guaranteed while wealth inequality is addressed;</li>
+                        <li>(d) Cultural diversity is celebrated and protected;</li>
+                        <li>(e) The environment is preserved and restored for those who will inherit it.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>This Constitution is offered as an open source framework, inviting adaptation, improvement, and evolution in response to changing needs and growing wisdom.</p>
+                </div>
+            </article>
+            
+            <article id="article-ii">
+                <h2>ARTICLE II - Definitions</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>For purposes of this Constitution, the following terms shall have the meanings specified:</p>
+                    <ul>
+                        <li>(a) <span class="subsection-label">Person</span> means any human being.</li>
+                        <li>(b) <span class="subsection-label">Individual</span> means a single person as distinguished from a group or organization.</li>
+                        <li>(c) <span class="subsection-label">Registered Citizen</span> means a person who has been entered into the Citizen Registry as prescribed in Article VII.</li>
+                        <li>(d) <span class="subsection-label">Citizen</span> means a registered individual who has paid or had deducted the Annual Citizenship Tax for the current fiscal year, thereby confirming citizenship status.</li>
+                        <li>(e) <span class="subsection-label">Region</span> means a governmental jurisdiction composed of two or more municipalities as prescribed in Article VIII.</li>
+                        <li>(f) <span class="subsection-label">Municipality</span> means a governmental jurisdiction composed of two or more neighborhoods as prescribed in Article VIII.</li>
+                        <li>(g) <span class="subsection-label">Neighborhood</span> means a local governmental jurisdiction meeting the population and dwelling requirements prescribed in Article VIII, Section 2.</li>
+                        <li>(h) <span class="subsection-label">First Nations</span> means those peoples with documented pre-colonial presence in the territories encompassed by this constitution.</li>
+                        <li>(i) <span class="subsection-label">Latter Nations</span> means cultural and political communities that emerged following colonial contact.</li>
+                        <li>(j) <span class="subsection-label">Indigenous Nations</span> means, collectively, both First Nations and Latter Nations when referenced in the context of political representation and voting.</li>
+                        <li>(k) <span class="subsection-label">Appropriate First Nations</span> means those First Nations with documented historical or ancestral connection to a specific territory, determined through self-assertion, historical treaties, archaeological evidence, oral tradition, and recognition by other First Nations, as prescribed in Article VI, Section 7(a).</li>
+                        <li>(l) <span class="subsection-label">Traditional Leader</span> means a person recognized by custom and tradition as holding a leadership role within their community, as prescribed in Article V.</li>
+                        <li>(m) <span class="subsection-label">Federal Vote</span> means a vote conducted among all citizens of the legal jurisdiction of this constitution through the secure digital voting platform, with results determined by the thresholds specified for each type of decision.</li>
+                        <li>(n) <span class="subsection-label">Council of Representatives</span> means a temporary body that may convene during extreme emergencies as prescribed in Article XI, Section 6.</li>
+                        <li>(o) <span class="subsection-label">Legal Jurisdiction</span> means the territorial extent and population over which this Constitution holds authority, comprising all Regions, First Nations, and other jurisdictions that have ratified this Constitution.</li>
+                        <li>(p) <span class="subsection-label">Personal Property</span> means movable property and possessions owned by an individual, excluding land and permanent structures which cannot be owned under Article VI.</li>
+                        <li>(q) <span class="subsection-label">Lease</span> means a contractual arrangement granting use rights to land for a specified term not exceeding 99 years, as prescribed in Article VI, Section 7.</li>
+                        <li>(r) <span class="subsection-label">Annual Citizenship Tax</span> means the tax equal to 0.1% of the combined value of a registered individual's total assets and annual income, as prescribed in Article VII, Section 5.</li>
+                        <li>(s) <span class="subsection-label">Federal Retirement Account</span> means the investment account established for each registered citizen as prescribed in Article VII, Section 4.</li>
+                        <li>(t) <span class="subsection-label">Public Auditor</span> means the elected official responsible for auditing federal government accounts, serving a 2-year term as prescribed in Article XIII, Section 3.</li>
+                        <li>(u) <span class="subsection-label">Emergency</span> means a situation requiring immediate action due to natural disaster, public health crisis, military threat, civil disturbance, insurrection, or other urgent circumstances that threaten public peace, health, or safety, as determined by the processes prescribed in this Constitution.</li>
+                        <li>(v) <span class="subsection-label">State</span> means any existing nation-state, sovereign territory, or governmental jurisdiction seeking to transition to governance under this Constitution.</li>
+                        <li>(w) <span class="subsection-label">Substantially all territory</span> means 95% or more of a territory by both land area and population.</li>
+                        <li>(x) <span class="subsection-label">Territorial claims</span> means the documented connection of an Indigenous Nation to specific lands, based on continuous presence, cultural practices, stewardship, and recognition by First Nations with overlapping claims.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>Terms not defined in this Article shall be interpreted according to their common meaning at the time of interpretation, with consideration for the purposes and principles articulated in Article I.</p>
+                </div>
+            </article>
+            
+            <article id="article-iii">
+                <h2>ARTICLE III - Supremacy</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>This constitution is the expression of the Sovereignty of the People and is the Supreme Law and Societal Contract upon which all other Societal Intercourse relies, within the Legal Jurisdiction of this constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>No Corporation, Nation, or Group may provide financial resources to a candidate for political office, an affiliate to the candidate's election campaign, a family member, an investment, or any other financial connection of the candidate.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>Any law, regulation, or governmental action that conflicts with this Constitution is invalid to the extent of such conflict. Citizens may challenge the constitutionality of any measure through the processes established in this Constitution.</p>
+                </div>
+            </article>
+            
+            <article id="article-iv">
+                <h2>ARTICLE IV - Declaration of Rights</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>No law may deny or impair Freedom of Expression, Peaceable Assembly, Association, or Petition.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>No law may be passed establishing a Federal religion, Regional religion, or Municipal religion, or impairing the free exercise of religion, or lack thereof.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>A person may not be deprived of life or Personal Property in any case, or be denied liberty without due process of law, or be denied the equal protection of the laws.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>Equal protection of the laws may not be denied or impaired on account of sex, race, ancestry, country of origin, language, gender, caste, ethnicity, or any other inherent category.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>The right of the people to be secure in their persons, homes, documents, actions, thoughts and other possessions against unreasonable search, seizure, or invasion of privacy may not be violated without a warrant. A warrant may not issue except on probable cause, supported by affidavit particularly describing the place to be searched and the persons or things to be seized. Civil asset forfeiture must be followed by a speedy judicial decision whether to return the assets.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 6.</h3>
+                    <p>The defendant in a case has a right to a speedy public trial, to be informed of the nature of the accusation, to have counsel for defense, to be confronted with the witnesses against the defendant, and to compel attendance of witnesses on the defendant's behalf.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 7.</h3>
+                    <p>A person may not be compelled to give evidence that may be used against him in a criminal case, or be twice put in jeopardy for the same offense.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 8.</h3>
+                    <p>Excessive and disproportionate bail may not be required, excessive or disproportionate fines imposed, or cruel and/or unusual punishments inflicted. The writ of <em>habeas corpus</em> may not be suspended in any case.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 9.</h3>
+                    <p>Capital punishment, involuntary servitude, imprisonment for debt, and slavery are prohibited in all cases.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 10.</h3>
+                    <p>A bill of attainder or <em>ex post facto</em> law may not be passed.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 11.</h3>
+                    <p>A citizen may freely travel and migrate within and throughout the legal jurisdiction of this constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 12.</h3>
+                    <p>All citizens shall have a right to reliable internet access, which shall be provided as a public utility necessary for participation in federal governance.</p>
+                </div>
+            </article>
+            
+            <article id="article-v">
+                <h2>ARTICLE V - Traditional Rights</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>Nothing in this Constitution takes away a role or function of a Traditional Leader as recognized by custom and tradition, or prevents a Traditional Leader from being recognized, honored, and given formal or functional roles at any level of government as may be prescribed by this constitution or by statute.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>The traditions of the People may be protected by law enacted through Federal Vote. If challenged as violative of Article IV, protection of tradition shall be considered a compelling social purpose warranting such governmental action.</p>
+                </div>
+            </article>
+            
+            <article id="article-vi">
+                <h2>ARTICLE VI - Territory</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>The territory is organized into Regions which are composed of neighborhoods and municipalities. All such constituent jurisdictions form the Region; Regions may not contain enclaves or exclaves.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>The territory includes that of the Regions that ratify this constitution. Unless limited by international treaty obligations assumed by this union, or by its own act, the waters connecting the islands of an archipelago are internal waters regardless of dimensions, and jurisdiction extends to a marine space of 200 miles measured outward from appropriate baselines, the seabed, subsoil, water column, insular or continental shelves. The territory additionally includes airspace over land or water, and any other territory or waters belonging to a region by historic right, custom, or legal title.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>The territory of each Region is comprised of the lands, waters, and skies of each State as defined by laws in effect immediately prior to the effective date of this constitution. Each Region is comprised of the territory of its constituent jurisdictions. A marine boundary between adjacent Regions is determined by law, applying the principle of equidistance.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>Territory may be added to the union by vote of the inhabitants of the area, if any, and by Federal Vote.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>New Regions may be formed and admitted by law, subject to the same rights, duties, and obligations as provided for in this constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 6.</h3>
+                    <p>No territory in the form of land, water, air or any other form may be owned, sold, or held in perpetuity by any individual, group, company, corporation, or any other entity. Land is owned jointly by Regional governments and the appropriate First Nations, and in rare cases at the Federal level through lease from Regions and First Nations.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 7.</h3>
+                    <p>Land use and leasing:</p>
+                    <ul>
+                        <li>(a) All land within a Region is owned jointly by that Region and the Indigenous Nations with recognized territorial claims to that land. The determination of which Indigenous Nations have territorial claims shall be based on documented historical or ancestral connection, continuous presence, cultural practices, stewardship, and recognition by affected First Nations.</li>
+                        <li>(b) Regions and First Nations may jointly lease land to individuals, corporations, the federal government, or other entities for terms not to exceed 99 years.</li>
+                        <li>(c) Leases may be renewed upon expiration according to terms prescribed by Regional or First Nation law. Automatic renewal may be included as a provision in the original lease agreement.</li>
+                        <li>(d) Leasehold interests may be inherited, sold, or transferred according to the terms of the lease and applicable Regional or First Nation law.</li>
+                        <li>(e) The terms, conditions, costs, and procedures for obtaining and maintaining land leases shall be determined by each Region and appropriate First Nations, having due regard for ensuring access to land for all citizens.</li>
+                        <li>(f) Use rights, including the right to build, modify, sublease, or otherwise utilize leased land, shall be determined by Regional and First Nation law and specified in lease agreements.</li>
+                        <li>(g) Conditions under which a lease may be terminated prior to expiration shall be determined by Regional and First Nation law, with such terminations subject to fair compensation and due process as prescribed by this Constitution.</li>
+                        <li>(h) Distinctions between residential, commercial, agricultural, and other categories of land use may be established by Regional and First Nation law.</li>
+                        <li>(i) Major land use decisions, including those affecting parcels larger than the average lot size in the Region or involving resource extraction, require approval from the appropriate First Nations. The process for such approval, including caucusing, voting thresholds, and timelines, shall be determined by the First Nations themselves through mechanisms established by law.</li>
+                        <li>(j) In cases of disagreement between a Region and appropriate First Nations regarding land use, the matter may be resolved through the Federal judicial process as prescribed in Article XII, or through alternative dispute resolution mechanisms established by the parties.</li>
+                    </ul>
+                </div>
+            </article>
+            
+            <article id="article-vii">
+                <h2>ARTICLE VII - Citizenship</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>Citizenship is conferred to all registered individuals who have paid or had deducted the Annual Citizenship Tax for the relevant fiscal year.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>A person 18 years or older registers as a citizen by submitting their name and Region ID to the Citizen Registry. Registering as a citizen of more than 1 Region, Municipality, Neighborhood, or Indigenous Nation is prohibited.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>A child of a citizen may be registered in the Citizen Registry by their citizen parent or citizen legal guardian. Fingerprints and/or a birth certificate may be submitted in lieu of the required Region ID.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>Federal Retirement Account:</p>
+                    <ul>
+                        <li>(a) Upon registration in the Citizen Registry, a Federal Retirement Account shall be established for each registered individual.</li>
+                        <li>(b) Federal Retirement Accounts shall be managed by a federal financial agency or through a decentralized system as prescribed by law.</li>
+                        <li>(c) Funds in Federal Retirement Accounts shall be invested in securities and financial markets to generate growth over time, with investment strategies prescribed by law.</li>
+                        <li>(d) Account holders may not withdraw funds from their Federal Retirement Account until reaching 65 years of age, except as provided in this section.</li>
+                        <li>(e) Account holders may borrow up to 50% of their account's current value for any purpose. Such loans shall be subject to terms prescribed by law and shall remain valid obligations even if the borrower renounces citizenship.</li>
+                        <li>(f) Upon an account holder's death, the account value shall be transferred to designated inheritor(s) according to the account holder's specifications:
+                            <ul>
+                                <li>Each inheritor shall receive either a specified value or a specified percentage of the total account value at time of death;</li>
+                                <li>If the sum of specified values exceeds the total account value, each inheritor shall receive a proportional share calculated by dividing their specified value by the sum of all specified values, then multiplying by the actual account value;</li>
+                                <li>If no inheritors are designated, the account value shall be transferred to the general fund.</li>
+                            </ul>
+                        </li>
+                        <li>(g) Account holders who renounce citizenship under this Constitution forfeit all claims to their Federal Retirement Account, and no inheritors shall receive any portion thereof.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>Annual Citizenship Tax:</p>
+                    <ul>
+                        <li>(a) The Annual Citizenship Tax shall be 0.1% of the combined value of a registered individual's total assets and annual income.</li>
+                        <li>(b) The tax is due annually on January 1st, with a grace period extending to June 30th of the same year.</li>
+                        <li>(c) Citizens may pay the Annual Citizenship Tax up to one year in advance.</li>
+                        <li>(d) If a registered individual is unable to pay the Annual Citizenship Tax by the end of the grace period, the tax amount shall be automatically deducted from their Federal Retirement Account.</li>
+                        <li>(e) Revenue from the Annual Citizenship Tax shall be deposited into the general fund of the Federal Treasury.</li>
+                        <li>(f) Upon paying or having deducted the Annual Citizenship Tax, a registered individual is confirmed as a citizen for the relevant fiscal year.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 6.</h3>
+                    <p>Asset and Income Reporting:</p>
+                    <ul>
+                        <li>(a) All registered individuals shall report their total assets and annual income to the Federal Revenue Agency by January 1st of each year for purposes of calculating the Annual Citizenship Tax.</li>
+                        <li>(b) Assets subject to reporting include, but are not limited to: financial accounts, investments, vehicles, valuables, business interests, and any other items of significant monetary value. Leasehold interests in land or buildings are not considered assets for this purpose.</li>
+                        <li>(c) Aggregate asset and income data shall be made publicly available for purposes of tracking wealth distribution and economic inequality.</li>
+                        <li>(d) Individual asset and income data shall remain confidential except as required for tax administration and law enforcement purposes.</li>
+                        <li>(e) An appeals process shall be established by law to address disputes regarding asset reporting, valuations, or tax calculations. The grounds for appeal shall not be limited to specific circumstances.</li>
+                        <li>(f) Individuals who fail to report assets and income may do so at any time thereafter and shall have their citizenship confirmed upon reporting and paying or having deducted any outstanding Annual Citizenship Tax.</li>
+                        <li>(g) Intentional fraud in asset or income reporting shall be subject to criminal penalties as prescribed by law.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 7.</h3>
+                    <p>Registration of Adults:</p>
+                    <ul>
+                        <li>(a) Any person 18 years or older who is not currently a registered citizen may register by submitting their name and Region ID to the Citizen Registry and paying the Annual Citizenship Tax for the current fiscal year.</li>
+                        <li>(b) Upon registration and payment or deduction of the Annual Citizenship Tax, a Federal Retirement Account shall be established for the newly registered citizen.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 8.</h3>
+                    <p>Rights of Registered Children:</p>
+                    <ul>
+                        <li>(a) Upon a registered child's 18th birthday, the individual may choose to renounce citizenship under this Constitution, in which case their Federal Retirement Account shall be forfeited to the general fund, or the individual may choose to assume responsibility for their own Annual Citizenship Tax.</li>
+                        <li>(b) Children who choose to maintain citizenship shall make their first independent Annual Citizenship Tax payment or have it deducted from their Federal Retirement Account by their 19th birthday.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 9.</h3>
+                    <p>Incentivized Participation:</p>
+                    <ul>
+                        <li>(a) Citizens who participate in federal voting beyond the minimum required percentage as prescribed in Article X shall receive small contributions to their Federal Retirement Accounts as an incentive for civic engagement.</li>
+                        <li>(b) The amount of such contributions shall be prescribed by law and shall be modest so as not to create undue financial incentives for voting patterns.</li>
+                    </ul>
+                </div>
+            </article>
+            
+            <article id="article-viii">
+                <h2>ARTICLE VIII - Levels of Government</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>The four levels of government under this constitution are Federal, Regional, Municipal, and Local. Each shall have a similarly open source constitution. All such constitutions are invalid to the extent that they conflict with this constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>The Local level of government consists of neighborhoods with a population of no less than 150 Individuals, or 10 separate, permanently occupied dwellings, and not exceeding 1,000 Individuals or 500 separate, permanently occupied dwellings.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>The Municipal level of government consists of two or more neighborhoods that agree to form a municipality.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>The Regional level of government consists of two or more municipalities that agree to form a region. For the purposes of Federal Governance, regions shall not contain other regions as geographic enclaves or exclaves.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>The Federal level of government consists of all Indigenous Nations and Regions that ratify this constitution.</p>
+                </div>
+            </article>
+            
+            <article id="article-ix">
+                <h2>ARTICLE IX - Powers of Government</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>A power expressly delegated to the Federal government, or a power of such an indisputably Federal character as to be beyond the power of a Region to control, is a Federal power.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>A power not expressly delegated to the Federal government or prohibited to the Region is a Regional power.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>Regional, Municipal and Local governments are prohibited from imposing taxes which restrict interjurisdictional commerce.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>First Nations possess sovereign powers equivalent to Regional powers, including the authority to govern their peoples, manage jointly-owned territories in accordance with Article VI, establish judicial systems, and exercise all powers not expressly delegated to the Federal government or prohibited by this Constitution.</p>
+                </div>
+            </article>
+            
+            <article id="article-x">
+                <h2>ARTICLE X - Legislative</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>The legislative power of the government is vested in the People, who exercise this power through direct participation via secure digital platforms and mandatory voting on all proposed federal measures.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>The four levels of government under this Constitution shall each have legislative systems outlined in their Constitutions. All such systems are invalid to the extent that they conflict with this Constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>Federal legislation operates through a continuous collaborative process:</p>
+                    <ul>
+                        <li>(a) <strong>Proposal Platform</strong>: A secure online collaborative deliberative platform enables any citizen to propose new laws, amendments, or policy initiatives. This platform operates similarly to structured argument mapping systems, allowing:
+                            <ul>
+                                <li>hierarchical organization of proposals with supporting and opposing arguments;</li>
+                                <li>collaborative refinement of legal language by multiple citizens;</li>
+                                <li>nested commentary and discussion on specific provisions;</li>
+                                <li>evidence linking and citation requirements;</li>
+                                <li>version tracking of all edits and contributions.</li>
+                            </ul>
+                        </li>
+                        <li>(b) <strong>Quarterly Cycle</strong>: Proposals advance through a four-phase quarterly cycle:
+                            <ul>
+                                <li><strong>Phase 1 (Months 1-3)</strong>: Drafting period during which proposals are submitted, refined through collaborative editing, and discussed publicly;</li>
+                                <li><strong>Phase 2 (Months 4-6)</strong>: Voting period during which all registered citizens vote on proposals submitted in the previous drafting period;</li>
+                                <li><strong>Phase 3 (Months 7-9)</strong>: Drafting period for new proposals;</li>
+                                <li><strong>Phase 4 (Months 10-12)</strong>: Voting period for proposals submitted in Phase 3.</li>
+                            </ul>
+                        </li>
+                        <li>(c) <strong>Continuous Ballots</strong>: Proposals not withdrawn by their proponents remain on subsequent ballots until ratified or withdrawn, allowing measures to build support over multiple cycles.</li>
+                        <li>(d) <strong>Enactment</strong>: Proposals receiving a simple majority of votes cast are enacted into law at the conclusion of the voting period.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>Platform security and integrity:</p>
+                    <ul>
+                        <li>(a) The collaborative legislative platform and all voting systems shall employ security measures prescribed by law to prevent fraud, manipulation, and unauthorized access;</li>
+                        <li>(b) Security protocols shall include identity verification, encryption, comprehensive audit trails, and mechanisms for detecting irregularities;</li>
+                        <li>(c) All security measures and their implementation shall be publicly documented and subject to independent audit by international observers;</li>
+                        <li>(d) Regular security assessments and updates shall be mandatory, with results reported to all citizens.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>Voting requirements and participation:</p>
+                    <ul>
+                        <li>(a) All registered citizens are required to cast votes, though blank votes are permitted;</li>
+                        <li>(b) Citizens must vote on a minimum of 10% of federal measures on each ballot, focusing on matters of federal significance;</li>
+                        <li>(c) Regional, Municipal, and Local measures are subject to similar requirements at their respective levels as prescribed by their constitutions;</li>
+                        <li>(d) Additional voluntary participation beyond the minimum requirement is incentivized through small contributions to the citizen's federal retirement account;</li>
+                        <li>(e) The collaborative legislative platform shall provide educational materials, summaries, and deliberative discussions for each measure to facilitate informed participation.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 6.</h3>
+                    <p>Indigenous Nations legislative participation:</p>
+                    <ul>
+                        <li>(a) All proposed legislation shall be made available to all Indigenous Nations party to this constitution for review during the voting period;</li>
+                        <li>(b) Any Indigenous Nation may choose to participate in voting on any proposed measure. If at least one Indigenous Nation chooses to participate in voting on a measure, all Indigenous Nations shall have the opportunity to vote on that measure;</li>
+                        <li>(c) When Indigenous Nations participate in voting on a measure, the measure is enacted only if it receives:
+                            <ul>
+                                <li>A simple majority of citizens voting in favor; AND</li>
+                                <li>A simple majority of Indigenous Nations voting in favor;</li>
+                            </ul>
+                        </li>
+                        <li>(d) If no Indigenous Nations choose to participate in voting on a measure, it is enacted if it receives a simple majority of citizens voting in favor;</li>
+                        <li>(e) Indigenous Nations determine their own internal processes for deciding how to vote on federal measures.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 7.</h3>
+                    <p>Emergency legislative procedures:</p>
+                    <ul>
+                        <li>(a) Measures requiring immediate action due to natural disaster, public health emergency, military threat, or other urgent circumstances may be designated for emergency voting;</li>
+                        <li>(b) Emergency measures follow an accelerated cycle lasting no more than seven days from proposal to vote;</li>
+                        <li>(c) Emergency designation requires approval by a two-thirds vote of citizens voting on the emergency designation;</li>
+                        <li>(d) All emergency measures enacted shall be subject to review and potential reversal in the next regular voting cycle.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 8.</h3>
+                    <p>Constitutional amendments:</p>
+                    <ul>
+                        <li>(a) Amendments to this Constitution may be proposed through the same collaborative platform and quarterly cycle as ordinary legislation;</li>
+                        <li>(b) Constitutional amendments require a simple majority of votes cast to be ratified, except for amendments to Article IV (Declaration of Rights) which require a three-fourths majority;</li>
+                        <li>(c) Regional constitutional amendments follow similar procedures at the Regional level with thresholds prescribed by Regional constitutions.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 9.</h3>
+                    <p>Federal legislative powers - The following legislative powers and obligations are expressly delegated to the Federal government:</p>
+                    <ul>
+                        <li>(a) to provide for Federal defense;</li>
+                        <li>(b) to ratify Federal treaties;</li>
+                        <li>(c) to regulate citizenship as it pertains to this union;</li>
+                        <li>(d) to impose taxes, duties, and tariffs based on imports;</li>
+                        <li>(e) to impose taxes on income and on citizenship to this union;</li>
+                        <li>(f) to issue and/or regulate currency;</li>
+                        <li>(g) to regulate banking, foreign and interjurisdictional commerce, insurance, the issuance and use of commercial paper and securities, bankruptcy and insolvency, and patents and copyrights;</li>
+                        <li>(h) to regulate navigation and shipping, except within bodies of water entirely within the jurisdiction of a single Region or First Nation;</li>
+                        <li>(i) to establish usury limits on major loans;</li>
+                        <li>(j) to provide for a Federal postal system;</li>
+                        <li>(k) to establish and regulate a Federal public service system;</li>
+                        <li>(l) to define Federal crimes and prescribe penalties, having due regard for local custom and tradition;</li>
+                        <li>(m) to promote education and health by setting minimum standards, coordinating Federal activities relating to foreign assistance, providing training and assistance to Regions and First Nations and providing support for postsecondary educational programs and projects.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 10.</h3>
+                    <p>Concurrent powers - The following powers may be exercised concurrently by the Federal government and lower levels of government:</p>
+                    <ul>
+                        <li>(a) to appropriate public funds;</li>
+                        <li>(b) to borrow money on the public credit;</li>
+                        <li>(c) to establish systems of social security and public welfare;</li>
+                        <li>(d) to regulate navigation and shipping in bodies of water entirely within the jurisdiction of a single Region or First Nation.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 11.</h3>
+                    <p>Tax uniformity and distribution:</p>
+                    <ul>
+                        <li>(a) Taxes shall be imposed uniformly;</li>
+                        <li>(b) Not less than 75% of revenues shall be paid into the treasury of the jurisdiction from which the taxes are collected;</li>
+                        <li>(c) Net revenue derived from all land leases, resource exploitation, and related activities under the joint ownership of Regions and First Nations shall be divided such that:
+                            <ul>
+                                <li>The appropriate First Nations collectively receive 50% of the net revenue, to be divided equally among all First Nations with recognized claims to the territory;</li>
+                                <li>The relevant Region receives 25% of the net revenue;</li>
+                                <li>The Federal government receives 25% of the net revenue.</li>
+                            </ul>
+                        </li>
+                        <li>(d) Revenue from navigation and shipping activities prescribed under Section 9(h) and Section 10(d) shall be distributed according to the same formula in subsection (c).</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 12.</h3>
+                    <p>Public service compensation: Anyone employed under provisions outlined in this constitution may receive an annual salary and allowances totaling no more than twice the median annual salary of the Region in which they are registered as a citizen, estimated for the most recent relevant fiscal year.</p>
+                </div>
+            </article>
+            
+            <article id="article-xi">
+                <h2>ARTICLE XI - Executive</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>The executive power of the government is vested in the People, who exercise this power through direct participation in governance via secure digital platforms.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>The day-to-day administration of federal governance operates through online systems modeled on collaborative deliberative platforms. These systems enable:</p>
+                    <ul>
+                        <li>(a) citizen proposals of laws, policies, and initiatives;</li>
+                        <li>(b) collaborative refinement of proposals through structured argument mapping and discussion;</li>
+                        <li>(c) public review and commentary on all proposed measures;</li>
+                        <li>(d) mandatory voting on federal measures by all registered citizens;</li>
+                        <li>(e) implementation of ratified measures by rotating citizen committees.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>Laws and policies are proposed and ratified through the continuous quarterly cycle prescribed in Article X, with citizens required to vote on a minimum percentage of federal measures and additional participation incentivized through small contributions to their federal retirement accounts.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>Emergency measures requiring immediate action may be subject to a special vote cycle lasting no more than seven days. Such measures may address:</p>
+                    <ul>
+                        <li>(a) natural disasters requiring immediate federal response;</li>
+                        <li>(b) threats to public health or safety;</li>
+                        <li>(c) imminent military threats or international crises;</li>
+                        <li>(d) interjurisdictional emergencies requiring federal coordination.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>Implementation of enacted laws shall be carried out by:</p>
+                    <ul>
+                        <li>(a) rotating citizen committees with term limits of 2 years, staffed by volunteers or citizens selected by lottery from relevant professional or regional pools. Committee members may not serve consecutive terms, but may serve non-consecutive terms;</li>
+                        <li>(b) Regional and Municipal governments within their respective jurisdictions as prescribed by law;</li>
+                        <li>(c) federal service agencies managed by rotating oversight councils.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 6.</h3>
+                    <p>A Council of Representatives may convene and wield executive power if required to preserve public peace, health, or safety, at a time of extreme emergency caused by civil disturbance, natural disaster, immediate threat of war, insurrection, or interjurisdictional emergency.</p>
+                    <ul>
+                        <li>(a) A Council of Representatives is valid only when two-thirds of all constituent jurisdictions are represented;</li>
+                        <li>(b) No such council may wield executive power for more than 30 days;</li>
+                        <li>(c) A new council of different representatives may convene and be legally valid for another 30 days. Representatives to a Council may not serve on consecutive Councils, but may serve on non-consecutive Councils;</li>
+                        <li>(d) Such councils may by statute establish temporary executive departments, judicial bodies, or security forces, which remain valid only while that council is valid;</li>
+                        <li>(e) Emergency Council authority and limitations:
+                            <ul>
+                                <li>(i) Emergency Councils may take immediate action on matters of life, health, and safety;</li>
+                                <li>(ii) All financial commitments, treaties, legal obligations, and other substantive actions with enduring consequences must be approved by emergency Federal Vote as prescribed in Article X, Section 7 before being executed;</li>
+                                <li>(iii) Military actions may only be taken pursuant to a declaration of war or authorization of force previously approved by Federal Vote, with strategic decisions and significant escalations requiring separate approval;</li>
+                                <li>(iv) All actions taken during the emergency shall be subject to comprehensive review by Federal Vote within 30 days of the council's dissolution, with each substantive action voted on separately;</li>
+                                <li>(v) Actions that do not receive a simple majority in the review vote are nullified and have no legal effect.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 7.</h3>
+                    <p>International representation shall be conducted by:</p>
+                    <ul>
+                        <li>(a) delegates elected by Federal Vote for specific purposes and limited terms;</li>
+                        <li>(b) rotating representatives to international bodies such as the United Nations;</li>
+                        <li>(c) professional diplomatic staff serving under term limits prescribed by statute;</li>
+                        <li>(d) all treaties subject to ratification as prescribed in this Constitution.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 8.</h3>
+                    <p>The federal government shall maintain no permanent standing military force except as may be temporarily established by a Council of Representatives during times of emergency. Defense shall instead rely on:</p>
+                    <ul>
+                        <li>(a) mutual defense treaties with allied nations and First Nations;</li>
+                        <li>(b) civilian defense training and militia systems as prescribed by Regional, First Nation, and Municipal governments;</li>
+                        <li>(c) temporary military forces raised by Federal Vote in times of declared war or imminent threat.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 9.</h3>
+                    <p>Federal agencies required by this Constitution or by law shall operate under direction of rotating citizen oversight committees elected for terms prescribed by statute, with all members subject to the compensation limits prescribed in Article X, Section 12.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 10.</h3>
+                    <p>All citizens shall have a right to reliable internet access, which shall be provided as a public utility necessary for participation in federal governance.</p>
+                </div>
+            </article>
+            
+            <article id="article-xii">
+                <h2>ARTICLE XII - Judicial</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>The judicial power of the government is vested in the People.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>Regions and First Nations shall each have judicial systems outlined in their Constitutions. All such systems are invalid to the extent that they conflict with this Constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>The following judicial powers are expressly delegated to the Federal government:</p>
+                    <ul>
+                        <li>(a) to prescribe maximum sentences;</li>
+                        <li>(b) to resolve legal disputes between First Nations and Regional jurisdictions party to this constitution, cases affecting officials of foreign governments, cases in which the Federal government is a party, cases arising under this constitution, Federal law or treaties, in disputes between a Region and a citizen of another Region, between citizens of different Regions, and between a Region or a citizen thereof, and a foreign State, citizen, or subject.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>First Nations party to this constitution are expressly delegated the power to resolve cases appealed in the judicial system of a single First Nation. In cases appealed between First Nations, a judicial panel of First Nations party to this constitution may convene to evaluate the appeal, or if at least one Nation chooses, the case appeal may be subject to Section 3(b). In the latter scenario, a judicial panel of First Nations party to this constitution may convene prior to the decision to opine on the case.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>Regional jurisdictions party to this constitution are expressly delegated the power to resolve cases appealed in the judicial system of a single Region. If a simple majority of citizens of the relevant Region vote to appeal the case to the Federal government, the case appeal may be subject to Section 3(b).</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 6.</h3>
+                    <p>A judicial decision entails a trial during which the plaintiff and the defendant each present their case and take questions from the citizens of the relevant jurisdictions.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 7.</h3>
+                    <p>A judicial decision in a Region is ratified when a simple majority of the citizens of the relevant jurisdiction and a simple majority of appropriate First Nations ratify the decision.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 8.</h3>
+                    <p>A judicial decision at the Federal level regarding constitutional matters or major disputes between Regions and First Nations is ratified when a simple majority of the citizens of the Legal Jurisdiction of this constitution and a simple majority of all Indigenous Nations party to this constitution ratify the decision.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 9.</h3>
+                    <p>A judicial decision regarding the appeal of a case in the judicial system of a single First Nation is ratified when a simple majority of all First Nations party to this constitution ratify the decision.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 10.</h3>
+                    <p>Judicial decisions shall be consistent with this constitution, with traditional customs and practices, and with the social and geographical configuration of the Legal Jurisdiction of this constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 11.</h3>
+                    <p>Local land use disputes and minor cases:</p>
+                    <ul>
+                        <li>(a) Disputes between a Region and appropriate First Nations regarding land use for parcels smaller than the average lot size or not involving resource extraction may be resolved through regional judicial processes without requiring Federal Vote.</li>
+                        <li>(b) Mechanisms for alternative dispute resolution, mediation, and arbitration between Regions and First Nations may be established by law.</li>
+                        <li>(c) Emergency land use decisions necessitated by natural disasters, public health emergencies, or imminent threats may be made by regional authorities subject to retrospective review by appropriate First Nations within a reasonable timeframe prescribed by law.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 12.</h3>
+                    <p>Constitutional challenges:</p>
+                    <ul>
+                        <li>(a) Any citizen may challenge the constitutionality of a law, regulation, or governmental action by submitting a petition through the collaborative legislative platform.</li>
+                        <li>(b) Constitutional challenges shall be decided by emergency Federal Vote as prescribed in Article X, Section 7. During this 7-day period, the challenged measure shall be suspended.</li>
+                        <li>(c) The constitutional challenge is decided when:
+                            <ul>
+                                <li>A simple majority of citizens voting find the measure unconstitutional; OR</li>
+                                <li>A simple majority of all Indigenous Nations party to this constitution find the measure unconstitutional.</li>
+                            </ul>
+                        </li>
+                        <li>(d) Measures found unconstitutional are permanently struck down. Measures not found unconstitutional are reinstated and may not be challenged again for at least 2 years.</li>
+                        <li>(e) Decisions on constitutional challenges may be appealed through the same process as other judicial decisions prescribed in this Article.</li>
+                    </ul>
+                </div>
+            </article>
+            
+            <article id="article-xiii">
+                <h2>ARTICLE XIII - Financial & Structural Integrity</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>Treasury structure:</p>
+                    <ul>
+                        <li>(a) A Federal Treasury shall be established for the finances of the federal government. Regions and First Nations may establish their own treasuries.</li>
+                        <li>(b) Money raised or received by the Federal government shall be deposited in a general fund or special fund within the Federal Treasury. Money may not be withdrawn from the general fund or special fund except by law enacted through Federal Vote.</li>
+                        <li>(c) Foreign financial assistance received by the Federal government shall be deposited in a Foreign Assistance Fund. Except where a particular distribution is required by the terms or special nature of the assistance, each Region and First Nation shall receive a share equal to the share of the Federal government and to the share of every other Region and First Nation.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>Budget process:</p>
+                    <ul>
+                        <li>(a) An annual Federal budget shall be proposed through the collaborative legislative platform and enacted by Federal Vote. The budget shall contain a complete plan of proposed expenditures, anticipated revenues, and other money available to the Federal government for the next fiscal year.</li>
+                        <li>(b) Any citizen or rotating federal agency committee may propose budget items or amendments through the standard quarterly legislative cycle.</li>
+                        <li>(c) Emergency appropriations may be enacted through the seven-day emergency voting process as prescribed in Article X, Section 7.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>Public Auditor:</p>
+                    <ul>
+                        <li>(a) The Public Auditor shall be selected by Federal Vote from among candidates nominated through the collaborative legislative platform or by petition of citizens.</li>
+                        <li>(b) The Public Auditor serves for a single term of 2 years. The Public Auditor may not serve consecutive terms, but may be elected to serve non-consecutive terms.</li>
+                        <li>(c) The Public Auditor shall inspect and audit accounts in every branch, department, agency, or statutory authority of the Federal government and in other public legal entities or nonprofit organizations receiving public funds from the Federal government. Additional duties may be prescribed by law.</li>
+                        <li>(d) The Public Auditor shall be independent of administrative control and shall report at least once every 12 months directly to all citizens through public reports made available on the federal governance platform. An increase of salary may not apply to the Public Auditor during the Public Auditor's term of office.</li>
+                        <li>(e) The Public Auditor may be removed from office for cause by Federal Vote requiring a two-thirds majority. In that event, an acting Public Auditor shall be selected by lottery from among the other candidates who received the most votes in the most recent Public Auditor election, if such candidates remain available and eligible. If no such candidates are available or eligible, a special expedited Federal Vote shall be held to select an acting Public Auditor to serve until the next regular Public Auditor election.</li>
+                    </ul>
+                </div>
+            </article>
+            
+            <article id="article-xiv">
+                <h2>ARTICLE XIV - General Provisions</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>All parties to this constitution shall recognize the right of the people to life, liberty, happiness, education, health care, and legal services and shall take every step reasonable and necessary to provide these services.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>Radioactive, toxic chemical, or other harmful substances may not be tested, stored, used, or disposed of within the legal jurisdiction of this constitution without the express approval by Federal Vote.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>It is the solemn obligation of all parties to this constitution to uphold the provisions of this Constitution and to advance the principles of unity upon which this Constitution is founded.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>A noncitizen, or a corporation not wholly owned by citizens, may not lease land or waters except as permitted by Regional or First Nation law and subject to the restrictions prescribed in this Constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>A lease agreement for the use of land for an indefinite term by a noncitizen, a corporation not wholly owned by citizens, or any foreign government is prohibited.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 6.</h3>
+                    <p>On assuming office, all persons serving in positions of public trust, including Public Auditors, members of Councils of Representatives, rotating committee members, and other appointed or elected positions, shall take an oath to uphold, promote, and support the laws and the Constitution as prescribed by law.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 7.</h3>
+                    <p>Enforcement of federal law:</p>
+                    <ul>
+                        <li>(a) Regional police forces and judicial systems shall enforce federal law within their jurisdictions;</li>
+                        <li>(b) Persistent refusal by a Region to enforce federal law constitutes a material breach of this Constitution;</li>
+                        <li>(c) Upon determination by Federal Vote that a Region has persistently refused to enforce federal law, remedies may include:
+                            <ul>
+                                <li>Suspension of federal revenue sharing;</li>
+                                <li>Temporary suspension of the Region's voting rights;</li>
+                                <li>Authorization of enforcement by other Regions' personnel;</li>
+                                <li>Suspension of the Region from the union;</li>
+                            </ul>
+                        </li>
+                        <li>(d) Such determinations require a two-thirds majority in Federal Vote and a simple majority of Indigenous Nations;</li>
+                        <li>(e) A suspended Region may petition for readmission through the ratification process prescribed in Article XVIII.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 8.</h3>
+                    <p>Economic framework:</p>
+                    <ul>
+                        <li>(a) Private enterprise and market mechanisms shall operate within the framework of public land ownership established by this Constitution;</li>
+                        <li>(b) Corporations and individuals may lease land and structures, own movable property and equipment, hold intellectual property rights, and engage in commerce subject to regulations prescribed by law;</li>
+                        <li>(c) Financial capital, securities, intellectual property, and other non-real property assets may be privately owned and transferred;</li>
+                        <li>(d) The Federal government shall regulate commerce to prevent monopolization, protect workers' rights, ensure environmental sustainability, and promote equitable distribution of economic benefits;</li>
+                        <li>(e) International trade and investment shall be permitted subject to regulations that protect the principles established in this Constitution, including public land ownership and First Nations territorial rights.</li>
+                    </ul>
+                </div>
+            </article>
+            
+            <article id="article-xv">
+                <h2>ARTICLE XV - Calendar</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>Fiscal year:</p>
+                    <p>The fiscal year of the Federal government shall begin on January 1st and end on December 31st of each calendar year.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>Federal holidays:</p>
+                    <p>The following days are recognized as Federal holidays:</p>
+                    <ul>
+                        <li><strong>January 15:</strong> Civil Rights Day</li>
+                        <li><strong>February 15:</strong> African Heritage Day</li>
+                        <li><strong>March 17:</strong> European Heritage Day</li>
+                        <li><strong>April 15:</strong> Asian and Pacific Islander Heritage Day</li>
+                        <li><strong>Last Monday of May:</strong> Memorial Day</li>
+                        <li><strong>June 19:</strong> Juneteenth Independence Day</li>
+                        <li><strong>July 14:</strong> Decolonization Day</li>
+                        <li><strong>August 15:</strong> Diversity Day</li>
+                        <li><strong>First Monday of September:</strong> Labor Day</li>
+                        <li><strong>October 15:</strong> Indigenous Heritage Day</li>
+                        <li><strong>Fourth Thursday of November:</strong> Thanksgiving</li>
+                        <li><strong>December 25:</strong> Christmas</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>Quarterly legislative cycle:</p>
+                    <ul>
+                        <li>(a) The quarterly legislative cycle prescribed in Article X shall operate on the following schedule:
+                            <ul>
+                                <li><strong>Quarter 1 Drafting Period:</strong> January 1 - March 31</li>
+                                <li><strong>Quarter 1 Voting Period:</strong> April 1 - June 30</li>
+                                <li><strong>Quarter 2 Drafting Period:</strong> July 1 - September 30</li>
+                                <li><strong>Quarter 2 Voting Period:</strong> October 1 - December 31</li>
+                            </ul>
+                        </li>
+                        <li>(b) Citizens must complete their minimum required voting by the last day of each voting period.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>Law enactment process:</p>
+                    <ul>
+                        <li>(a) Upon conclusion of a voting period, there shall be a two-week period during which any citizen may file appeals or claims regarding voting irregularities, election security, or validity concerns.</li>
+                        <li>(b) If no appeals are filed, laws that received the required threshold of votes shall take effect at the conclusion of the two-week appeal period.</li>
+                        <li>(c) <strong>Early enactment:</strong> If during a voting period a proposal receives sufficient affirmative votes such that the outcome is mathematically certain regardless of remaining votes, the two-week appeal period shall begin immediately. If no appeals are filed within those two weeks, the law shall take effect on the 15th day following the date the threshold was reached.</li>
+                        <li>(d) If appeals are filed, an investigation must be conducted and concluded within three months. Laws under investigation shall not take effect until the investigation concludes and validates the vote, or a new vote may be called if irregularities are found.</li>
+                        <li>(e) For Quarter 1 voting (ending June 30):
+                            <ul>
+                                <li>Appeal period: July 1 - July 14</li>
+                                <li>If no appeals: Laws take effect July 15</li>
+                                <li>If appeals: Investigation July 15 - October 14</li>
+                            </ul>
+                        </li>
+                        <li>(f) For Quarter 2 voting (ending December 31):
+                            <ul>
+                                <li>Appeal period: January 1 - January 14</li>
+                                <li>If no appeals: Laws take effect January 15</li>
+                                <li>If appeals: Investigation January 15 - April 14</li>
+                            </ul>
+                        </li>
+                        <li>(g) The body responsible for conducting investigations of voting irregularities shall be established by law.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>Public Auditor election:</p>
+                    <ul>
+                        <li>(a) The Public Auditor election shall be held during the Quarter 1 Voting Period (April 1 - June 30) of even-numbered years.</li>
+                        <li>(b) Upon conclusion of the voting period, there shall be a two-week period during which any citizen may file appeals or claims regarding voting irregularities or election security.</li>
+                        <li>(c) If appeals are filed, an investigation must be conducted and concluded by September 30. If irregularities are found that warrant a new election, such election shall be called immediately.</li>
+                        <li>(d) Barring irregularities requiring a new election, the Public Auditor's term shall begin on October 1st following their election.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 6.</h3>
+                    <p>Annual Citizenship Tax:</p>
+                    <p>The Annual Citizenship Tax prescribed in Article VII is due on January 1st of each year, with the grace period extending to June 30th as prescribed in Article VII, Section 5.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 7.</h3>
+                    <p>Regional, Municipal, and Local calendars:</p>
+                    <p>Regions, Municipalities, Local governments, and First Nations may establish their own calendars, holidays, and legislative cycles, provided they do not conflict with Federal requirements under this Constitution.</p>
+                </div>
+            </article>
+            
+            <article id="article-xvi">
+                <h2>ARTICLE XVI - Amendments</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>An amendment to this Constitution may be proposed by any citizen through the collaborative legislative platform in the manner provided by Article X.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>A proposed amendment shall become a part of the Constitution when approved by a simple majority vote in Federal Vote, subject to Indigenous Nations participation as prescribed in Article X, Section 6.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>Amendments to Article IV (Declaration of Rights) require a three-fourths majority vote in Federal Vote.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>Emergency amendments may be proposed and voted upon using the seven-day emergency voting process prescribed in Article X, Section 7, and require the same voting thresholds as specified in this Article.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>Any amendment to this Constitution may itself be amended or repealed through the same process by which it was enacted.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 6.</h3>
+                    <p>At least every 10 years, the question "Shall there be a convention to revise or amend the Constitution?" shall be submitted to Federal Vote. If a majority of ballots cast upon the question is in the affirmative, delegates to the convention shall be chosen in the manner prescribed by Federal Vote.</p>
+                </div>
+            </article>
+            
+            <article id="article-xvii">
+                <h2>ARTICLE XVII - Transition</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>Treaty continuity: Treaties between existing States and First Nations or Tribes continue in effect except to the extent inconsistent with this Constitution, or as amended or repealed. Writs, actions, suits, proceedings, civil or criminal liability, prosecutions, judgments, sentences, orders, decrees, appeals, causes of action, defenses, contracts, claims, demands, titles, or rights continue unaffected except as modified in accordance with this Constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>Grassroots organization: The transition to governance under this Constitution shall proceed from the bottom up, through voluntary organization of neighborhoods, municipalities, and Regions.</p>
+                    <ul>
+                        <li>(a) People residing in a geographic area may organize themselves into Neighborhoods meeting the requirements of Article VIII, Section 2;</li>
+                        <li>(b) Two or more Neighborhoods may agree to form a Municipality as prescribed in Article VIII, Section 3;</li>
+                        <li>(c) Two or more Municipalities may agree to form a Region as prescribed in Article VIII, Section 4;</li>
+                        <li>(d) First Nations may organize according to their own traditions and customs, consistent with the principles of this Constitution.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>Joining the union: Once organized, a Region or First Nation may join this union through the ratification process prescribed in Article XVIII.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>Existing governmental obligations:</p>
+                    <ul>
+                        <li>(a) When substantially all territory comprising an existing State has organized into one or more Regions under this Constitution, the rights, obligations, liabilities, and contracts of that State government shall be assumed by the Federal government or distributed among the successor Regions as determined by Federal Vote. Deliberate retention of nominal territory for the purpose of avoiding obligations under this section shall be void and without legal effect.</li>
+                        <li>(b) Until a State's entire territory has organized under this Constitution, existing State and local governments may continue to operate under their current legal frameworks;</li>
+                        <li>(c) People residing in areas not yet organized under this Constitution retain all rights under existing law.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>Property transfer: When all territory of an existing State has organized under this Constitution, interests in property held by that State government may be transferred to the Federal government or distributed among successor Regions as determined by Federal Vote, for retention or use in accordance with this Constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 6.</h3>
+                    <p>Local government transition: Local governments and their agencies may continue to exist even though their charters or powers are inconsistent with this Constitution, to promote an orderly transition. Mechanisms for resolving inconsistencies shall be determined by the relevant Regional government or by Federal Vote. This provision ceases to be effective 5 years after a Region's ratification of this Constitution.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 7.</h3>
+                    <p>Latter Nations recognition and organization:</p>
+                    <ul>
+                        <li>(a) Cultural and political communities that identify as Latter Nations may organize and seek recognition as parties to this constitution through Federal Vote;</li>
+                        <li>(b) A petition for recognition as a Latter Nation must demonstrate a defined cultural or historical identity as a distinct people, an organized governance structure capable of participating in Federal processes, and such other criteria as may be prescribed by law;</li>
+                        <li>(c) The criteria and processes for Latter Nations recognition may be further refined by law enacted through Federal Vote;</li>
+                        <li>(d) Once recognized, Latter Nations have the same voting rights and responsibilities as First Nations under this Constitution;</li>
+                        <li>(e) Recognition as a Latter Nation does not automatically confer territorial rights. Latter Nations seeking territorial claims to specific lands must demonstrate documented connection through continuous presence, cultural practices, and stewardship, and obtain recognition from the First Nations with existing claims to those lands;</li>
+                        <li>(f) Territorial claim petitions that are denied may not be resubmitted for the same territory for at least 2 years;</li>
+                        <li>(g) Territorial claims may be recognized incrementally for different portions of claimed territory as agreements are reached with different First Nations.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 8.</h3>
+                    <p>Additional transition provisions: Additional transition provisions may be adopted by Federal Vote to address unforeseen circumstances and promote a smooth transition to governance under this Constitution.</p>
+                </div>
+            </article>
+            
+            <article id="article-xviii">
+                <h2>ARTICLE XVIII - Effective Date</h2>
+                
+                <div class="section">
+                    <h3>Section 1.</h3>
+                    <p>This Constitution takes effect for any Region, First Nation, or Latter Nation upon ratification by a majority of voters in a referendum held among eligible voters within that jurisdiction.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 2.</h3>
+                    <p>The ratification referendum shall be conducted using secure voting methods and shall:</p>
+                    <ul>
+                        <li>(a) remain open for voting for a period of not less than 30 days;</li>
+                        <li>(b) require a minimum participation rate of 50% of eligible voters;</li>
+                        <li>(c) be conducted with international observation to ensure fairness and transparency.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 3.</h3>
+                    <p>This Constitution does not fail if only a subset of potential jurisdictions ratify it. The union shall be formed by those jurisdictions that successfully ratify, with the expectation and invitation that additional jurisdictions may join over time.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 4.</h3>
+                    <p>Any Region, First Nation, or Latter Nation not part of the initial ratification may hold a ratification referendum at any time and shall join this union immediately upon successful ratification.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 5.</h3>
+                    <p>Upon ratification by at least one Region or First Nation, a transition period of one year shall commence, during which the structures and processes outlined in this Constitution shall be established for participating jurisdictions.</p>
+                </div>
+                
+                <div class="section">
+                    <h3>Section 7.</h3>
+                    <p>Initial election oversight:</p>
+                    <ul>
+                        <li>(a) The first ratification referenda and Federal Votes conducted under this Constitution shall be observed and verified by international election monitoring organizations invited by the organizing communities;</li>
+                        <li>(b) Until a permanent investigation body is established by law, allegations of voting irregularities in Federal Votes shall be investigated by temporary panels composed of:
+                            <ul>
+                                <li>Representatives from international election monitoring organizations;</li>
+                                <li>Representatives from participating Regions and First Nations;</li>
+                                <li>Independent technical experts in election security;</li>
+                            </ul>
+                        </li>
+                        <li>(c) Regions, Municipalities, and Neighborhoods shall establish their own processes for ensuring election integrity at their respective levels, subject to standards prescribed by Federal Vote;</li>
+                        <li>(d) This temporary federal oversight structure shall remain in effect until replaced by permanent mechanisms established through Federal Vote, but no longer than two years from the first Federal Vote.</li>
+                    </ul>
+                </div>
+            </article>
+            
+            <section id="notes" class="notes">
+                <h2>NOTES FOR FURTHER DEVELOPMENT</h2>
+                
+                <p>This Constitution addresses the core structural elements of governance but intentionally leaves certain implementation details to be determined through democratic processes. The following areas merit continued attention and development:</p>
+                
+                <h3>Implementation Challenges:</h3>
+                
+                <p><strong>1. Voter Education at Scale:</strong></p>
+                <ul>
+                    <li>How to ensure millions of citizens can make informed decisions on quarterly ballots with potentially hundreds of measures</li>
+                    <li>Development of educational infrastructure, media literacy programs, and fact-checking mechanisms</li>
+                    <li>Preventing misinformation and ensuring equitable access to information across diverse communities</li>
+                    <li>Balancing comprehensive education with decision fatigue</li>
+                </ul>
+                
+                <p><strong>2. Indigenous Nations Coordination:</strong></p>
+                <ul>
+                    <li>Practical mechanisms for Indigenous Nations to coordinate voting on federal legislation</li>
+                    <li>Timeline management when multiple Nations need to caucus on urgent matters</li>
+                    <li>Dispute resolution when Indigenous Nations disagree on major cross-territorial decisions</li>
+                    <li>Balancing participation demands with capacity constraints for smaller Nations</li>
+                    <li>Implementation of territorial claims process for Latter Nations</li>
+                </ul>
+                
+                <p><strong>3. Economic Transition:</strong></p>
+                <ul>
+                    <li>Detailed mechanisms for converting existing property ownership to 99-year lease system</li>
+                    <li>Managing the transition of corporations and financial markets to the new framework</li>
+                    <li>International economic relationships and trade agreements under public land ownership</li>
+                    <li>Ensuring economic stability during the transition period</li>
+                </ul>
+                
+                <p><strong>4. Technology Infrastructure:</strong></p>
+                <ul>
+                    <li>Ensuring universal, reliable internet access in rural and underserved areas</li>
+                    <li>Backup systems for voting if digital infrastructure fails</li>
+                    <li>Continuous security improvements as threats evolve</li>
+                    <li>Accessibility accommodations for citizens with disabilities</li>
+                </ul>
+                
+                <p><strong>5. Regional Compliance and Enforcement:</strong></p>
+                <ul>
+                    <li>Edge cases where multiple Regions refuse to enforce the same federal law</li>
+                    <li>Balancing federal supremacy with regional autonomy</li>
+                    <li>Interstate cooperation mechanisms for complex enforcement scenarios</li>
+                    <li>Role of Indigenous Nations in enforcement oversight</li>
+                </ul>
+                
+                <h3>Open Questions for Democratic Resolution:</h3>
+                
+                <p>These matters are intentionally left open for determination through Federal Vote:</p>
+                <ul>
+                    <li>Specific security protocols for the voting platform beyond baseline requirements in Article X, Section 4</li>
+                    <li>Detailed criteria for Latter Nations recognition beyond baseline requirements in Article XVII, Section 7</li>
+                    <li>Exact mechanisms for investigating voting irregularities after the initial transition period (Article XV, Section 4(g))</li>
+                    <li>Standards for local election integrity (Article XVIII, Section 7(c))</li>
+                    <li>Implementation details for voter education programs</li>
+                    <li>Refinements to the economic framework as experience reveals challenges</li>
+                    <li>Process details for Latter Nations territorial claims recognition</li>
+                </ul>
+                
+                <p><em>This document is offered as an open-source starting point, inviting adaptation, critique, and improvement through collaborative deliberation.</em></p>
+            </section>
+        </main>
+    </div>
+    
+    <a href="javascript:void(0)" class="back-to-top" data-target="top">↑ Back to Top</a>
+    
+    <script>
+        // Handle navigation clicks
+        document.addEventListener('click', function(e) {
+            const target = e.target;
+            
+            // Check if clicked element has a data-target attribute
+            if (target.hasAttribute('data-target')) {
+                e.preventDefault();
+                
+                const targetId = target.getAttribute('data-target');
+                
+                // Scroll to top if target is "top"
+                if (targetId === 'top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                
+                // Find and scroll to target element
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
